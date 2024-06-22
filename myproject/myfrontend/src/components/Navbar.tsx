@@ -20,19 +20,17 @@ const Navbar: React.FC = () => {
   return (
     <Nav className="wrapper-top" fill pills>
       <NavItem>
-        <NavLink active={pathname === '/app/orgs'} href="/app/orgs">
+        <NavLink active={pathname === "/app/orgs"} href="/app/orgs">
           Orgs
         </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink active={pathname === '/app/users'} href="/app/users">
+        <NavLink active={pathname === "/app/users"} href="/app/users">
           Users
         </NavLink>
       </NavItem>
       <NavItem onClick={handleLogout}>
-        <NavLink href="/">
-            Logout
-        </NavLink>
+        <NavLink href="/">Logout</NavLink>
       </NavItem>
     </Nav>
   );

@@ -3,7 +3,7 @@ import { useAuth } from "../AuthContext";
 import { getOrganizations } from "../api";
 import { Table } from "reactstrap";
 
-import '../App.css';
+import "../App.css";
 
 const Orgs: React.FC = () => {
   const { token } = useAuth();
@@ -26,7 +26,7 @@ const Orgs: React.FC = () => {
 
   return (
     <div className="wrapper">
-        <Table className="custom-table">
+      <Table className="custom-table">
         <thead>
           <tr>
             <td>Org_Id</td>
@@ -43,7 +43,7 @@ const Orgs: React.FC = () => {
         </tbody>
       </Table>
     </div>
-    );
+  );
 };
 
 export default Orgs;
