@@ -11,7 +11,6 @@ const Orgs: React.FC = () => {
       try {
         //@ts-ignore
         const data = await getOrganizations(token);
-        console.log(data);
         setOrgs(data);
       } catch (error) {
         console.error("Error fetching organizations:", error);
