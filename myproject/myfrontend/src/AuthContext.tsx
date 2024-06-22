@@ -1,4 +1,6 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
+//@ts-ignore
+import Cookies from 'js-cookie';
 
 interface AuthContextType {
     token: string | null;
@@ -9,16 +11,23 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [token, setToken] = useState<string | null>(localStorage.getItem('token') || null); // Retrieve token from localStorage if available
+    const [token, setToken] = useState<string | null>(Cookies.get('token') || null);
+
+    useEffect(() => {
+        const storedToken = Cookies.get('token');
+        if (storedToken) {
+            setToken(storedToken);
+        }
+    }, []);
 
     const login = (token: string) => {
         setToken(token);
-        localStorage.setItem('token', token); // Save token to localStorage
+        Cookies.set('token', token, { expires: 7 }); // Set cookie with expiration time (7 days)
     };
 
     const logout = () => {
         setToken(null);
-        localStorage.removeItem('token'); // Remove token from localStorage
+        Cookies.remove('token');
     };
 
     return (
