@@ -1,6 +1,7 @@
 // src/components/UserForm.tsx
 import React, { useState, useEffect } from 'react';
 import { getOrganizations, createUser } from '../api';
+import { useAuth } from '../AuthContext';
 
 const UserForm: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -9,17 +10,22 @@ const UserForm: React.FC = () => {
     const [organizationId, setOrganizationId] = useState<number | null>(null);
     const [organizations, setOrganizations] = useState<any[]>([]);
 
+    const { token } = useAuth();
+
     useEffect(() => {
         const fetchOrganizations = async () => {
             try {
-                const orgs = await getOrganizations();
+                //@ts-ignore
+                const orgs = await getOrganizations(token);
                 setOrganizations(orgs);
             } catch (error) {
                 console.error('Error fetching organizations:', error);
             }
         };
-        fetchOrganizations();
-    }, []);
+        if(token){
+            fetchOrganizations();
+        }
+    }, [token]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

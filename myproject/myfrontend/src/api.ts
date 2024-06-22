@@ -6,9 +6,13 @@ export const login = (username: string, password: string) => {
     return axios.post(`${API_URL}/token/`, { username, password });
 };
 
-export const getOrganizations = async () => {
+export const getOrganizations = async (token: string) => {
     try {
-        const response = await axios.get(`${API_URL}/organizations/`);
+        const response = await axios.get(`${API_URL}/organizations/`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
         return response.data;
     } catch (error) {
         console.error('Error fetching organizations:', error);
@@ -31,8 +35,14 @@ export const createUser = async (username: string, email: string, password: stri
     }
 };
 
-export const getUsers = (token: string) => {
-    return axios.get(`${API_URL}/users/`, {
-        headers: { Authorization: `Bearer ${token}` },
-    });
+export const getUsers = async (token: string) => {
+    try {
+        const response = await axios.get(`${API_URL}/users/`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        throw error;
+    }
 };

@@ -9,14 +9,16 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [token, setToken] = useState<string | null>(null);
+    const [token, setToken] = useState<string | null>(localStorage.getItem('token') || null); // Retrieve token from localStorage if available
 
     const login = (token: string) => {
         setToken(token);
+        localStorage.setItem('token', token); // Save token to localStorage
     };
 
     const logout = () => {
         setToken(null);
+        localStorage.removeItem('token'); // Remove token from localStorage
     };
 
     return (
