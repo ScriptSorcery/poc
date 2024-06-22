@@ -26,10 +26,10 @@ const Orgs: React.FC = () => {
       <h1>Orgs</h1>
       <table>
         <thead>
-          <th>
+          <tr>
             <td>Org_Id</td>
             <td>Org_Name</td>
-          </th>
+          </tr>
         </thead>
         <tbody>
           {(orgs || []).map((org: any) => (

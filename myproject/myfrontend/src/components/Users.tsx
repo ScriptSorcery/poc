@@ -20,7 +20,7 @@ const Users: React.FC = () => {
         <div>
             <h1>Users</h1>
             <ul>
-                {users.map((user: any) => (
+                {(users || []).map((user: any) => (
                     <li key={user.id}>{user.username}</li>
                 ))}
             </ul>
