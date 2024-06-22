@@ -8,4 +8,7 @@ class Organization(models.Model):
         return self.name
 
 class User(AbstractUser):
-    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='users')
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, null=True, related_name='users')
+
+    def __str__(self):
+        return self.username
