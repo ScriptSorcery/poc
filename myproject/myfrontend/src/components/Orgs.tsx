@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../AuthContext";
 import { getOrganizations } from "../api";
+import { Table } from "reactstrap";
 
 const Orgs: React.FC = () => {
   const { token } = useAuth();
@@ -22,9 +23,8 @@ const Orgs: React.FC = () => {
   }, [token]);
 
   return (
-    <div>
-      <h1>Orgs</h1>
-      <table>
+    <div className="wrapper">
+        <Table>
         <thead>
           <tr>
             <td>Org_Id</td>
@@ -39,9 +39,9 @@ const Orgs: React.FC = () => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     </div>
-  );
+    );
 };
 
 export default Orgs;
