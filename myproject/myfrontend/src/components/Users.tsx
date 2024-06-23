@@ -19,7 +19,7 @@ const Users: React.FC = () => {
       if (token) {
         const response = await getUsers(token);
         console.log(response)
-        setUsers(response);
+        setUsers(response.data);
       }
     };
     fetchUsers();
